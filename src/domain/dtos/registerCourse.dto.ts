@@ -1,9 +1,9 @@
 export class RegisterCourseDto{
     constructor(
-        idNumber: string,
-        shortName: string,
-        fullName: string,
-        type: string,
-        version:string
+        public idNumber: string,
+        public shortName: string,
+        public fullName: string,
+        public type: string,
+        public version:string
     ) {}
 }

@@ -20,9 +20,9 @@ export class CourseSequelize extends Model<CourseRow, Omit<CourseRow, 'id'>> {
     declare shortName: string
     declare type: string
     declare version: string
-    declare readonly createdAt?: Date
-    declare readonly updatedAt?: Date
-    declare readonly deletedAt?: Date
+    declare readonly createdAt: Date
+    declare readonly updatedAt: Date
+    declare readonly deletedAt: Date
 }
 
 CourseSequelize.init({
