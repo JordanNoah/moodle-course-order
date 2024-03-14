@@ -31,4 +31,8 @@ export class OrganizationRepositoryImpl implements OrganizationRepository {
     enable(id: number): Promise<OrganizationEntity> {
         return this.organizationDatasource.enable(id)
     }
+
+    getByAbbreviationAndModality(abbreviation: string, modality: string): Promise<OrganizationEntity | null> {
+        return this.organizationDatasource.getByAbbreviationAndModality(abbreviation,modality)
+    }
 }

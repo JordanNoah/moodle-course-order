@@ -75,6 +75,22 @@ export class OrganizationDatasourceImpl implements OrganizationDatasource {
         }
     }
 
+    async getByAbbreviationAndModality(abbreviation: string, modality: string): Promise<OrganizationEntity | null> {
+        try {
+            return await OrganizationSequelize.findOne({
+                where:{
+                    abbreviation:abbreviation.toUpperCase(),
+                    modality:modality.toLowerCase()
+                }
+            })
+        } catch (error) {
+            if(error instanceof CustomError){
+                throw error
+            }
+            throw CustomError.internalSever()
+        }
+    }
+
     async deleteById(id: number): Promise<OrganizationEntity> {
         try {
             const organization = await this.getById(id)

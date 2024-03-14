@@ -1,3 +1,5 @@
+import {AcademicElementDto} from "./process/academicElement.dto";
+
 export class RegisterCourseDto{
     constructor(
         public idNumber: string,

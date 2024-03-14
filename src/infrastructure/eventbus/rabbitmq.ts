@@ -53,7 +53,7 @@ export class Rabbitmq {
         )
     }
 
-    public static fakeConsume(){
+    public static async fakeConsume(){
         const json = {
             "uuid":"3v31yn05-2302-0000-t3s7-pru6845q4ADg",
             "fired_at":"2024-02-22T19:49:19.139835Z",
@@ -521,7 +521,7 @@ export class Rabbitmq {
         };
         try {
             const [error,processDto] = ProcessDto.create(json)
-            new Process().run(processDto!)
+            await new Process().run(processDto!)
         }catch (e) {
             console.log(e)
         }
@@ -531,6 +531,6 @@ export class Rabbitmq {
         //await this.connection()
         //await this.setQueue()
         //await this.consume()
-        this.fakeConsume()
+        await this.fakeConsume()
     }
 }
