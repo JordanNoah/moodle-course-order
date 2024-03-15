@@ -4,7 +4,7 @@ import {GroupCourseEntity} from "../../domain/entities/groupCourse.entity";
 import {CustomError} from "../../domain/errors/custom.error";
 import {GroupCourseSequelize} from "../database/models/GroupCourse";
 
-export abstract class GroupCourseDatasourceImpl extends GroupCourseDatasource {
+export class GroupCourseDatasourceImpl extends GroupCourseDatasource {
     async register(registerCourseGroupDto: RegisterCourseGroupDto): Promise<GroupCourseEntity> {
         try {
             const {
@@ -21,7 +21,7 @@ export abstract class GroupCourseDatasourceImpl extends GroupCourseDatasource {
                 defaults:{
                     idCourse:idCourse,
                     idGroup:idGroup,
-                    order:1
+                    order:order
                 }
             })
 

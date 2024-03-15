@@ -12,6 +12,8 @@ import {or} from "sequelize";
 import {GroupDatasourceImpl} from "../datasources/group.datasource.impl";
 import {GroupCourseSequelize} from "../database/models/GroupCourse";
 import {GroupCourseDatasourceImpl} from "../datasources/groupCourse.datasource.impl";
+import {GroupCourseDatasource} from "../../domain/datasources/groupCourse.datasource";
+import {RegisterCourseGroupDto} from "../../domain/dtos/registerCourseGroup.dto";
 
 interface userToCreate {
     firstName: string,
@@ -114,19 +116,38 @@ export class Process {
                         for (let k = 0; k < academicElements.length; k++) {
                             const academicElement = academicElements[k]
                             let courseEntity = await new CourseDatasourceImpl().register(academicElement)
+                            const groupCourseDto = new RegisterCourseGroupDto(
+                                group.id,
+                                courseEntity.id,
+                                k
+                            )
+                            await new GroupCourseDatasourceImpl().register(groupCourseDto)
                         }
                     }
 
+                    let groupProgram;
                     for (let k = 0; k < courseElement.length; k++) {
                         let element = courseElement[k];
                         let courseEntity = await new CourseDatasourceImpl().register(element)
-                        if (courseEntity.type == "program") {
+
+                        if (courseEntity.type == "Program") {
                             const groupDto = new RegisterGroupDto(
                                 user.id,
                                 `Program`,
                                 `${courseEntity.fullName}`,
                                 `${courseEntity.shortName}`
                             )
+
+                            groupProgram = await new GroupDatasourceImpl().register(groupDto)
+                        }
+
+                        if (groupProgram != undefined){
+                            const groupCourseDto = new RegisterCourseGroupDto(
+                                groupProgram.id,
+                                courseEntity.id,
+                                k
+                            )
+                            await new GroupCourseDatasourceImpl().register(groupCourseDto)
                         }
                     }
                 }

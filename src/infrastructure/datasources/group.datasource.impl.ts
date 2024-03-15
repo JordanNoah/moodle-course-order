@@ -36,4 +36,20 @@ export class GroupDatasourceImpl implements GroupDatasource {
             throw CustomError.internalSever()
         }
     }
+
+    async getByIdUserAndType(idUser: number, typeGroup: string): Promise<GroupEntity|null> {
+        try {
+            return await GroupSequelize.findOne({
+                where:{
+                    idUser:idUser,
+                    type:typeGroup
+                }
+            })
+        } catch (error) {
+            if(error instanceof CustomError){
+                throw error
+            }
+            throw CustomError.internalSever()
+        }
+    }
 }
