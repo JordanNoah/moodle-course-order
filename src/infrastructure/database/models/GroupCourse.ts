@@ -9,8 +9,7 @@ interface GroupCourseRow {
     idCourse: number,
     order: number,
     createdAt?:Date,
-    updatedAt?:Date,
-    deletedAt?:Date
+    updatedAt?:Date
 }
 
 export class GroupCourseSequelize extends Model<GroupCourseRow,Omit<GroupCourseRow, 'id'>> {
@@ -20,7 +19,6 @@ export class GroupCourseSequelize extends Model<GroupCourseRow,Omit<GroupCourseR
     declare order: number
     declare readonly createdAt:Date
     declare readonly updatedAt:Date
-    declare readonly deletedAt:Date
 }
 
 GroupCourseSequelize.init({
@@ -53,7 +51,6 @@ GroupCourseSequelize.init({
 },{
     sequelize,
     timestamps:true,
-    paranoid:true,
     tableName:'group_course'
 })
 

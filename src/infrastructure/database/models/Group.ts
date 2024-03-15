@@ -9,8 +9,7 @@ interface GroupRow {
     name: string,
     shortname: string,
     createdAt?:Date,
-    updatedAt?:Date,
-    deletedAt?:Date
+    updatedAt?:Date
 }
 
 export class GroupSequelize extends Model<GroupRow,Omit<GroupRow, 'id'>> {
@@ -21,7 +20,6 @@ export class GroupSequelize extends Model<GroupRow,Omit<GroupRow, 'id'>> {
     declare shortname: string
     declare readonly createdAt:Date
     declare readonly updatedAt:Date
-    declare readonly deletedAt:Date
 }
 
 GroupSequelize.init({
@@ -54,7 +52,6 @@ GroupSequelize.init({
 },{
     sequelize,
     timestamps:true,
-    paranoid:true,
     tableName:'group'
 })
 

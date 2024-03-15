@@ -16,7 +16,7 @@ export class DegreeDto {
             active
         } = object
 
-        if(!active) return ['Missing active in degrees structure']
+        //if(active) return ['Missing active in degrees structure']
 
         return [
             undefined,

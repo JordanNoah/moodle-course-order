@@ -19,7 +19,6 @@ export const DbSequelize = (): Promise<void> => {
             await new OrganizationSeederExec().up()
             resolve()
         } catch (e) {
-            console.log(e)
             reject(e)
         }
     })

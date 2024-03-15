@@ -7,7 +7,6 @@ export class UserEntity {
         public idNumber: string,
         public idOrganization:number,
         public createdAt:Date,
-        public updatedAt:Date,
-        public deletedAt:Date
+        public updatedAt:Date
     ) {}
 }

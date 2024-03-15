@@ -41,9 +41,15 @@ export class Rabbitmq {
                 try {
                     if(msg?.properties.type === "academic-administration.sign-ups.student_signedup"){
                         const [error,processDto] = ProcessDto.create(JSON.parse(msg?.content!.toString()))
-                        new Process().run(processDto!)
+                        console.log(msg?.content!.toString())
+                        if (!error){
+                            await new Process().run(processDto!)
+                            this._channel.ack(msg!)
+                        } else {
+                            console.log(msg?.content!.toString())
+                            console.error(error)
+                        }
                     }else{
-                        console.log(msg?.properties.type)
                         this._channel.ack(msg!)
                     }
                 } catch (error) {
@@ -528,9 +534,9 @@ export class Rabbitmq {
     }
 
     public static async init() {
-        //await this.connection()
-        //await this.setQueue()
-        //await this.consume()
-        await this.fakeConsume()
+        await this.connection()
+        await this.setQueue()
+        await this.consume()
+        //await this.fakeConsume()
     }
 }

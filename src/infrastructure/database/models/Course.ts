@@ -9,8 +9,7 @@ interface CourseRow {
     type: string,
     version: string,
     createdAt?: Date,
-    updatedAt?: Date,
-    deletedAt?: Date
+    updatedAt?: Date
 }
 
 export class CourseSequelize extends Model<CourseRow, Omit<CourseRow, 'id'>> {
@@ -22,7 +21,6 @@ export class CourseSequelize extends Model<CourseRow, Omit<CourseRow, 'id'>> {
     declare version: string
     declare readonly createdAt: Date
     declare readonly updatedAt: Date
-    declare readonly deletedAt: Date
 }
 
 CourseSequelize.init({
@@ -55,6 +53,5 @@ CourseSequelize.init({
 },{
     sequelize,
     timestamps:true,
-    paranoid:true,
     tableName:'course'
 })

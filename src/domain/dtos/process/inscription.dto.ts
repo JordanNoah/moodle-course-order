@@ -46,7 +46,7 @@ export class InscriptionDto {
         } = object
 
         if(!uuid) return ['Missing uuid in inscription structure']
-        if(!active) return ['Missing active in inscription structure']
+        //if(!active) return ['Missing active in inscription structure']
 
         let introductoryModuleDtos: IntroductoryModuleDto[] = []
 

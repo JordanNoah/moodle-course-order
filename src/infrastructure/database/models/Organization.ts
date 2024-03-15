@@ -98,6 +98,5 @@ OrganizationSequelize.init({
 },{
     sequelize,
     timestamps: true,
-    paranoid: true,
     tableName: 'organization'
 })

@@ -10,7 +10,10 @@ export class RegisterOrganizationDto {
         public rest_path: string,
         public modality: string,
         public additional_data: string,
-        public translations: string
+        public translations: string,
+        public available: boolean,
+        public parent: number,
+        public importance: number
     ) {}
 
     static create(object: {[key:string]:any}):[string?,RegisterOrganizationDto?]{
@@ -25,11 +28,14 @@ export class RegisterOrganizationDto {
             rest_path,
             modality,
             additional_data,
-            translations
+            translations,
+            available,
+            parent,
+            importance
         } = object
 
         if (!abbreviation) return ['Missing abbreviation in structure']
-        if (!modality) return ['Missing modality in structure']
+        //if (!modality) return ['Missing modality in structure']
         if (!name) return ['Missing name in structure']
 
 
@@ -46,7 +52,10 @@ export class RegisterOrganizationDto {
                 rest_path,
                 modality,
                 additional_data,
-                translations
+                translations,
+                available,
+                parent,
+                importance
             )
         ]
     }

@@ -35,6 +35,5 @@ MoodleWsFunctionSequelize.init({
 },{
     sequelize,
     timestamps: true,
-    paranoid: true,
     tableName: 'moodle_ws_function'
 })

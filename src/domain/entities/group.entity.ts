@@ -6,7 +6,6 @@ export class GroupEntity {
         public name: string,
         public shortname: string,
         public createdAt:Date,
-        public updatedAt:Date,
-        public deletedAt:Date
+        public updatedAt:Date
     ) {}
 }

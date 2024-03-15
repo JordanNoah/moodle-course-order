@@ -18,7 +18,10 @@ export class OrganizationDatasourceImpl implements OrganizationDatasource {
                 uuid,
                 domain,
                 fullname,
-                additional_data
+                additional_data,
+                available,
+                parent,
+                importance
             } = registerOrganizationDto
 
             const [organizationDb,created] = await OrganizationSequelize.findOrCreate({
@@ -36,7 +39,9 @@ export class OrganizationDatasourceImpl implements OrganizationDatasource {
                     modality:modality,
                     additional_data:additional_data,
                     translations:translations,
-                    available:true
+                    available:available,
+                    parent:parent,
+                    importance:importance
                 }
             })
 

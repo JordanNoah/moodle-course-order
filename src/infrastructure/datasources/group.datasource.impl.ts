@@ -52,4 +52,20 @@ export class GroupDatasourceImpl implements GroupDatasource {
             throw CustomError.internalSever()
         }
     }
+
+    async removeByIdUserAndShortname(idUser: number, shortname: string): Promise<number> {
+        try {
+            return await GroupSequelize.destroy({
+                where:{
+                    idUser:idUser,
+                    shortname:shortname
+                }
+            })
+        } catch (error) {
+            if(error instanceof CustomError){
+                throw error
+            }
+            throw CustomError.internalSever()
+        }
+    }
 }

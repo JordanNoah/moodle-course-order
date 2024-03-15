@@ -14,7 +14,8 @@ export class ProcessDto {
             fired_at,
             student
         } = object
-        
+
+
         const [error,studentDto] = StudentDto.create(student)
 
         if (error) return [error]

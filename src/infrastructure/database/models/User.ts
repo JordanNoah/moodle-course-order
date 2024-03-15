@@ -10,8 +10,7 @@ interface UserRow {
     idNumber: string,
     idOrganization:number,
     createdAt?:Date,
-    updatedAt?:Date,
-    deletedAt?:Date
+    updatedAt?:Date
 }
 
 export class UserSequelize extends Model<UserRow,Omit<UserRow, 'id'>> {
@@ -23,7 +22,6 @@ export class UserSequelize extends Model<UserRow,Omit<UserRow, 'id'>> {
     declare idOrganization:number
     declare readonly createdAt:Date
     declare readonly updatedAt:Date
-    declare readonly deletedAt:Date
 }
 
 UserSequelize.init({
@@ -60,7 +58,6 @@ UserSequelize.init({
 },{
     sequelize,
     timestamps:true,
-    paranoid:true,
     tableName:'user'
 })
 

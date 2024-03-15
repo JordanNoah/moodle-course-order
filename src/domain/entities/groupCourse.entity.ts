@@ -5,7 +5,6 @@ export class GroupCourseEntity {
         public idCourse: number,
         public order: number,
         public createdAt:Date,
-        public updatedAt:Date,
-        public deletedAt:Date
+        public updatedAt:Date
     ) {}
 }

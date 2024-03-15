@@ -7,7 +7,6 @@ export class CourseEntity {
         public type: string,
         public version: string,
         public createdAt: Date,
-        public updatedAt: Date,
-        public deletedAt: Date
+        public updatedAt: Date
     ) {}
 }
