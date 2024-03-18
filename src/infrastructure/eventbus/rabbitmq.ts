@@ -40,11 +40,11 @@ export class Rabbitmq {
             async (msg) => {
                 try {
                     if(msg?.properties.type === "academic-administration.sign-ups.student_signedup"){
-                        const [error,processDto] = ProcessDto.create(JSON.parse(msg?.content!.toString()))
                         console.log(msg?.content!.toString())
+                        const [error,processDto] = ProcessDto.create(JSON.parse(msg?.content!.toString()))
                         if (!error){
-                            await new Process().run(processDto!)
-                            this._channel.ack(msg!)
+                           // await new Process().run(processDto!)
+                         //   this._channel.ack(msg!)
                         } else {
                             console.log(msg?.content!.toString())
                             console.error(error)

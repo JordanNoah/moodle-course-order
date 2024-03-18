@@ -40,90 +40,7 @@ export class Process {
      public async run(processDto:ProcessDto){
         try {
             for (let i = 0; i < processDto.student.inscriptions.length; i++) {
-                let inscription = processDto.student.inscriptions[i]
-                const enrollments = inscription.enrollments;
-
-                const onlyDownGrade = await this.isOnlyDownGrade(inscription.degrees)
-
-                const finalOrganization = await this.finalOrganizationByDegrees(inscription.degrees,inscription.modality,onlyDownGrade)
-
-
-                    const userDto = new RegisterStudentDto(
-                        processDto.student.uuid,
-                        processDto.student.referenceId,
-                        processDto.student.dni,
-                        processDto.student.firstName,
-                        processDto.student.lastName,
-                        processDto.student.userName,
-                        processDto.student.password,
-                        processDto.student.email,
-                        processDto.student.phone,
-                        processDto.student.address,
-                        processDto.student.language,
-                        finalOrganization!.id
-                    )
-
-                    const user = await new UserDatasourceImpl().register(userDto)
-
-                    for (let j = 0; j < enrollments.length; j++) {
-                        const enrollment = enrollments[j]
-                        let academicProgram: RegisterCourseDto = new RegisterCourseDto(
-                            `${enrollment.academicProgram.uuid}||${enrollment.academicProgram.version}`,
-                            `${enrollment.academicProgram.version}`,
-                            `${enrollment.academicProgram.name}`,
-                            `${enrollment.academicProgram.type}`,
-                            `${enrollment.academicProgram.version}`
-                        )
-
-
-                        const academicElements = enrollment.academicSelections.flatMap(
-                            selection => selection.academicElements)
-
-                        let courseElement:RegisterCourseDto[] = academicElements.map(element => ({
-                            idNumber:`${element.uuid}||${element.version}`,
-                            shortName:`${element.version}`,
-                            fullName:`${element.name}`,
-                            type:`${element.type}`,
-                            version:`${element.version}`
-                        }))
-
-                        courseElement.unshift(academicProgram)
-
-
-                        const groupInduction = await new GroupDatasourceImpl().getByIdUserAndType(user.id,'Induction')
-
-                        if (!onlyDownGrade) {
-                            if (groupInduction){
-                                await new GroupCourseDatasourceImpl().removeByIdGroup(groupInduction.id)
-                                await new GroupDatasourceImpl().removeByIdUserAndShortname(user.id,groupInduction.shortname)
-                                await this.createdOrGetInductionGroup(inscription,user)
-                            }else{
-                                await this.createdOrGetInductionGroup(inscription,user)
-                            }
-                        } else {
-                            if(groupInduction){
-                                await new GroupCourseDatasourceImpl().removeByIdGroup(groupInduction.id)
-                                await new GroupDatasourceImpl().removeByIdUserAndShortname(user.id,groupInduction.shortname)
-                            }
-                        }
-
-                        const groupProgram = await new GroupDatasourceImpl().getByIdUserAndType(user.id,'Program')
-                        if (!onlyDownGrade) {
-                            if (groupProgram) {
-                                await new GroupCourseDatasourceImpl().removeByIdGroup(groupProgram.id)
-                                await new GroupDatasourceImpl().removeByIdUserAndShortname(user.id,groupProgram.shortname)
-                                await this.createdOrGetProgramGroup(courseElement,user)
-                            } else {
-                                await this.createdOrGetProgramGroup(courseElement,user)
-                            }
-                        } else {
-                            if (groupProgram){
-                                await new GroupCourseDatasourceImpl().removeByIdGroup(groupProgram.id)
-                                await new GroupDatasourceImpl().removeByIdUserAndShortname(user.id,groupProgram.shortname)
-                            }
-                        }
-                    }
-
+                
             }
         } catch (error) {
             console.log(error)
@@ -236,5 +153,9 @@ export class Process {
                 await new GroupCourseDatasourceImpl().register(groupCourseDto)
             }
         }
+    }
+
+    public async toNewCampus(){
+         
     }
 }

@@ -5,6 +5,8 @@ import {UserSequelize} from "./models/User";
 import {CourseSequelize} from "./models/Course";
 import {GroupSequelize} from "./models/Group";
 import {GroupCourseSequelize} from "./models/GroupCourse";
+import {ProgramMigrationSequelize} from "./models/ProgramMigration";
+import {ProgramMigrationSeederExec} from "./seeders/execute/programMigration.seeder.exec";
 
 export const DbSequelize = (): Promise<void> => {
     return new Promise(async (resolve,reject) => {
@@ -15,8 +17,10 @@ export const DbSequelize = (): Promise<void> => {
             await CourseSequelize.sync()
             await GroupSequelize.sync()
             await GroupCourseSequelize.sync()
+            await ProgramMigrationSequelize.sync()
 
             await new OrganizationSeederExec().up()
+            await new ProgramMigrationSeederExec().up()
             resolve()
         } catch (e) {
             reject(e)
